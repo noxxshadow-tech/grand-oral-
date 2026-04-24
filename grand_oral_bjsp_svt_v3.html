@@ -1,0 +1,334 @@
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font-sans);color:var(--color-text-primary);background:transparent}
+.header{padding:18px 0 14px;border-bottom:0.5px solid var(--color-border-tertiary);margin-bottom:18px}
+.pill{display:inline-flex;gap:6px;align-items:center;font-size:11px;font-weight:500;padding:3px 10px;border-radius:20px;border:0.5px solid var(--color-border-secondary);color:var(--color-text-secondary);margin-bottom:10px}
+.question{font-size:17px;font-weight:500;line-height:1.45;margin-bottom:5px}
+.sub{font-size:12px;color:var(--color-text-secondary)}
+.tabs{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:16px}
+.tab{padding:6px 13px;border-radius:20px;border:0.5px solid var(--color-border-secondary);font-size:12px;font-weight:500;cursor:pointer;background:transparent;color:var(--color-text-secondary);transition:all .18s;white-space:nowrap}
+.tab.on{background:var(--color-text-primary);color:var(--color-background-primary);border-color:var(--color-text-primary)}
+.sec{display:none}.sec.on{display:block}
+.card{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:12px;padding:14px 16px;margin-bottom:10px}
+.inner{background:var(--color-background-secondary);border-radius:8px;padding:11px 13px;margin-bottom:8px}
+.inner:last-child{margin-bottom:0}
+.badge{display:inline-block;font-size:10px;font-weight:500;padding:2px 8px;border-radius:20px;margin-bottom:7px;letter-spacing:.2px}
+.svt{background:#E1F5EE;color:#085041}.perf{background:#E6F1FB;color:#0C447C}.oral{background:#FAEEDA;color:#633806}.warn{background:#FCEBEB;color:#791F1F}
+@media(prefers-color-scheme:dark){
+  .svt{background:#04342C;color:#5DCAA5}.perf{background:#042C53;color:#85B7EB}.oral{background:#412402;color:#FAC775}.warn{background:#501313;color:#F09595}
+}
+.row{display:flex;gap:8px;align-items:flex-start;margin-bottom:5px}
+.dot{width:5px;height:5px;border-radius:50%;background:var(--color-border-primary);margin-top:6px;flex-shrink:0}
+p,li{font-size:13px;line-height:1.72;color:var(--color-text-primary)}
+em{color:var(--color-text-secondary);font-style:italic}
+.sep{border:none;border-top:0.5px solid var(--color-border-tertiary);margin:11px 0}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.three{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}
+.metric{background:var(--color-background-secondary);border-radius:8px;padding:10px;text-align:center}
+.metric .v{font-size:22px;font-weight:500;margin-bottom:2px}
+.metric .l{font-size:11px;color:var(--color-text-secondary);line-height:1.4}
+.hl{border-left:3px solid var(--color-border-warning);background:var(--color-background-warning);padding:9px 12px;margin:9px 0;font-size:12px;line-height:1.6;border-radius:0}
+.hl.blue{border-left-color:var(--color-border-info);background:var(--color-background-info)}
+.hl.green{border-left-color:var(--color-border-success);background:var(--color-background-success)}
+.tl{padding-left:18px;margin:6px 0;position:relative}
+.tl::before{content:'';position:absolute;left:4px;top:5px;bottom:5px;width:1px;background:var(--color-border-secondary)}
+.tl-i{position:relative;margin-bottom:9px}
+.tl-i::before{content:'';position:absolute;left:-15px;top:5px;width:7px;height:7px;border-radius:50%;background:var(--color-border-secondary);border:1.5px solid var(--color-background-primary)}
+.pbar{height:5px;border-radius:3px;background:var(--color-border-tertiary);overflow:hidden;margin-top:4px}
+.pfill{height:100%;border-radius:3px}
+.plabel{display:flex;justify-content:space-between;font-size:11px;color:var(--color-text-secondary);margin-bottom:3px}
+.timer-grid{display:grid;grid-template-columns:auto 1fr;gap:4px 10px;align-items:start;margin:4px 0}
+.t-num{font-size:13px;font-weight:500;color:var(--color-text-secondary);white-space:nowrap;padding-top:1px}
+.btn{margin-top:12px;padding:7px 15px;border-radius:20px;border:0.5px solid var(--color-border-secondary);font-size:12px;font-weight:500;cursor:pointer;background:transparent;color:var(--color-text-secondary)}
+.btn:hover{background:var(--color-background-secondary)}
+.chap{font-size:11px;font-weight:500;color:var(--color-text-info);display:block;margin-bottom:3px}
+strong{font-weight:500}
+.new-badge{display:inline-block;font-size:10px;font-weight:500;padding:2px 8px;border-radius:20px;background:#EEEDFE;color:#3C3489;margin-left:6px;vertical-align:middle}
+@media(prefers-color-scheme:dark){.new-badge{background:#26215C;color:#AFA9EC}}
+</style>
+
+<div class="header">
+  <div class="pill">Grand oral · Terminale générale · SVT spécialité</div>
+  <p class="question">Comment la biologie explique-t-elle les échecs au parcours BJSP et comment les mécanismes étudiés en SVT permettent-ils de les surmonter ?</p>
+  <p class="sub">10 min d'exposé · 10 min de questions jury · Spécialité SVT</p>
+</div>
+
+<div class="tabs">
+  <button class="tab on" onclick="go(0)">Plan général</button>
+  <button class="tab" onclick="go(1)">Introduction</button>
+  <button class="tab" onclick="go(2)">I — Effort physique</button>
+  <button class="tab" onclick="go(3)">II — Nutrition</button>
+  <button class="tab" onclick="go(4)">III — Stress</button>
+  <button class="tab" onclick="go(5)">Conclusion</button>
+  <button class="tab" onclick="go(6)">Questions jury</button>
+</div>
+
+<!-- PLAN GENERAL -->
+<div class="sec on" id="s0">
+  <div class="card">
+    <div class="badge oral">Minutage — 10 min d'exposé</div>
+    <div class="timer-grid">
+      <span class="t-num">0'–1'30</span><p><strong>Introduction</strong> — accroche, contexte BJSP, problématique, annonce du plan</p>
+      <span class="t-num">1'30–4'</span><p><strong>Partie I</strong> — Métabolisme de l'effort et préparation physique</p>
+      <span class="t-num">4'–7'</span><p><strong>Partie II</strong> — Nutrition, énergie cellulaire et homéostasie</p>
+      <span class="t-num">7'–9'</span><p><strong>Partie III</strong> — Neurobiologie du stress et performance</p>
+      <span class="t-num">9'–10'</span><p><strong>Conclusion</strong> — réponse à la problématique + ouverture</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="badge svt">Plan détaillé — liens SVT</div>
+
+    <div class="inner">
+      <span class="chap">Chapitre SVT mobilisé : Métabolisme cellulaire — respiration / fermentation</span>
+      <p style="font-weight:500;margin-bottom:4px">I. L'échec physique : une question de métabolisme énergétique</p>
+      <div class="row"><div class="dot"></div><p>A) Les signes visibles : essoufflement, crampes, chute de coordination</p></div>
+      <div class="row"><div class="dot"></div><p>B) Explication SVT : VO₂max, seuil lactique, fermentation lactique et accumulation d'ions H⁺</p></div>
+      <div class="row"><div class="dot"></div><p>C) Solution : entraînement → biogénèse mitochondriale, adaptation cardiovasculaire, plasticité neuromusculaire</p></div>
+    </div>
+
+    <div class="inner">
+      <span class="chap">Chapitre SVT mobilisé : Homéostasie — régulation de la glycémie (insuline/glucagon)</span>
+      <p style="font-weight:500;margin-bottom:4px">II. L'échec nutritionnel : la rupture de l'homéostasie énergétique <span class="new-badge">corrigé</span></p>
+      <div class="row"><div class="dot"></div><p>A) Le carburant cellulaire : glycogène, ATP et rôle du glucose dans la contraction</p></div>
+      <div class="row"><div class="dot"></div><p>B) Signes et mécanismes d'échec : hypoglycémie réactionnelle, déshydratation, déficit protéique</p></div>
+      <div class="row"><div class="dot"></div><p>C) Stratégie nutritionnelle : restaurer l'homéostasie énergétique</p></div>
+    </div>
+
+    <div class="inner">
+      <span class="chap">Chapitre SVT mobilisé : Système nerveux — axe HPA, amygdale, cortex préfrontal</span>
+      <p style="font-weight:500;margin-bottom:4px">III. L'échec mental : la neurobiologie du stress aigu</p>
+      <div class="row"><div class="dot"></div><p>A) Signes visibles : tachycardie, hyperventilation, inhibition cognitive ("blanc")</p></div>
+      <div class="row"><div class="dot"></div><p>B) Mécanisme : amygdale → axe HPA → adrénaline/cortisol → mise en veille du cortex préfrontal</p></div>
+      <div class="row"><div class="dot"></div><p>C) Solution : cohérence cardiaque (nerf vague), visualisation motrice, recadrage cognitif</p></div>
+    </div>
+
+    <div class="hl green" style="margin-top:10px">Les trois parties suivent la même logique : <strong>mécanisme biologique → dysfonctionnement visible → solution</strong>. Plan symétrique, structure attendue par le jury.</div>
+  </div>
+
+  <div class="three">
+    <div class="metric"><div class="v" style="color:#D85A30">I</div><div class="l">Métabolisme<br>de l'effort</div></div>
+    <div class="metric"><div class="v" style="color:#1D9E75">II</div><div class="l">Homéostasie<br>nutritionnelle</div></div>
+    <div class="metric"><div class="v" style="color:#378ADD">III</div><div class="l">Neurobiologie<br>du stress</div></div>
+  </div>
+</div>
+
+<!-- INTRODUCTION -->
+<div class="sec" id="s1">
+  <div class="card">
+    <div class="badge oral">Accroche — 20 secondes</div>
+    <div class="inner">
+      <p>"Chaque année, des milliers de candidats échouent au parcours BJSP — épreuve physique du concours de sapeurs-pompiers — non par manque de volonté, mais parce que leur corps n'a pas été préparé selon les mécanismes biologiques qui gouvernent la performance."</p>
+    </div>
+    <div class="hl blue">Astuce jury : une accroche ancrée dans le réel montre que le sujet est choisi avec réflexion, pas par hasard.</div>
+  </div>
+
+  <div class="card">
+    <div class="badge svt">Contextualisation SVT</div>
+    <div class="inner">
+      <p>Le parcours BJSP mobilise simultanément trois grands systèmes biologiques étudiés en terminale SVT : le <em>métabolisme énergétique cellulaire</em>, la <em>régulation hormonale et l'homéostasie</em>, et le <em>système nerveux central et périphérique</em>. Ce sujet est donc une application directe et concrète du programme.</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="badge oral">Problématique à énoncer</div>
+    <div class="inner">
+      <p style="font-weight:500">"Dans quelle mesure les mécanismes biologiques étudiés en SVT permettent-ils d'expliquer les causes d'échec au parcours BJSP et d'y remédier par des stratégies scientifiquement fondées ?"</p>
+    </div>
+    <div class="sep"></div>
+    <div class="badge oral">Annonce du plan</div>
+    <div class="inner">
+      <p>"Nous verrons d'abord comment le métabolisme de l'effort conditionne la performance physique (I), puis comment la nutrition régule le carburant cellulaire disponible (II), et enfin comment la neurobiologie du stress peut faire échouer même le candidat le mieux préparé physiquement (III)."</p>
+    </div>
+  </div>
+  <button class="btn" onclick="sendPrompt('Améliore mon introduction de grand oral SVT sur le parcours BJSP, avec une accroche plus percutante')">Affiner l'introduction ↗</button>
+</div>
+
+<!-- PARTIE I -->
+<div class="sec" id="s2">
+  <div class="card">
+    <div class="badge svt">Chapitre SVT : Métabolisme cellulaire · Respiration et fermentation</div>
+    <p style="font-weight:500;font-size:14px;margin-bottom:10px">I. L'échec physique : une question de métabolisme énergétique</p>
+
+    <div class="inner">
+      <div class="badge perf">A — Signes visibles lors du parcours BJSP</div>
+      <div class="row"><div class="dot"></div><p>Essoufflement dès les premières secondes de course : la demande en O₂ dépasse la capacité de transport</p></div>
+      <div class="row"><div class="dot"></div><p>Crampes et sensation de brûlure aux mollets et quadriceps lors des franchissements d'obstacles</p></div>
+      <div class="row"><div class="dot"></div><p>Perte d'équilibre sur la poutre ou la bascule : la coordination neuromusculaire se dégrade sous fatigue</p></div>
+      <div class="row"><div class="dot"></div><p>Ralentissement progressif et abandon : le candidat ne peut plus maintenir l'allure imposée</p></div>
+    </div>
+
+    <div class="inner">
+      <div class="badge svt">B — Explication SVT : deux voies métaboliques en jeu</div>
+      <p style="margin-bottom:8px">Le BJSP est un effort <em>mixte</em> : il alterne phases d'endurance (course de liaison) et efforts explosifs (franchissements). Ces deux phases mobilisent des voies métaboliques distinctes :</p>
+      <div class="tl">
+        <div class="tl-i"><p><strong>Respiration cellulaire (aérobie) :</strong> Glucose + 6 O₂ → 6 CO₂ + 6 H₂O + ~30 ATP. Voie principale en régime modéré. Limitée par la <em>VO₂max</em> (débit maximal d'O₂ utilisable par les mitochondries musculaires).</p></div>
+        <div class="tl-i"><p><strong>Fermentation lactique (anaérobie) :</strong> au-delà du seuil lactique, glucose → acide lactique + 2 ATP seulement. L'accumulation d'ions H⁺ acidifie le cytoplasme et inhibe les enzymes de la contraction → crampes, perte de force explosive.</p></div>
+        <div class="tl-i"><p><strong>Conséquence sur la coordination :</strong> la fatigue musculaire altère les messages des <em>fuseaux neuromusculaires</em> vers le cervelet. Les réflexes d'équilibration se dégradent : chutes sur les obstacles d'adresse.</p></div>
+      </div>
+      <div class="plabel"><span>VO₂max sédentaire (~35 mL/kg/min)</span><span>40%</span></div>
+      <div class="pbar"><div class="pfill" style="width:40%;background:#D85A30"></div></div>
+      <div class="plabel" style="margin-top:6px"><span>VO₂max après 8 sem. de préparation BJSP</span><span>~70%</span></div>
+      <div class="pbar"><div class="pfill" style="width:70%;background:#1D9E75"></div></div>
+      <div class="hl">Mot-clé jury SVT : citer la distinction <strong>fibres de type I</strong> (lentes, aérobies, riches en mitochondries) et <strong>fibres de type II</strong> (rapides, glycolytiques) valorise la maîtrise du programme.</div>
+    </div>
+
+    <div class="inner">
+      <div class="badge perf">C — Solution : adapter l'entraînement aux mécanismes biologiques</div>
+      <div class="tl">
+        <div class="tl-i"><p><strong>Fractionné (HIIT) :</strong> stimule la <em>biogénèse mitochondriale</em> (multiplication des mitochondries par activation du gène PGC-1α). Hausse la VO₂max et repousse le seuil lactique.</p></div>
+        <div class="tl-i"><p><strong>Endurance fondamentale :</strong> développe la néoangiogenèse capillaire → meilleur transport de l'O₂ et du glucose vers les fibres musculaires.</p></div>
+        <div class="tl-i"><p><strong>Entraînement proprioceptif :</strong> affine la sensibilité des organes tendineux de Golgi et des fuseaux neuromusculaires → meilleur équilibre sur les obstacles du parcours.</p></div>
+      </div>
+    </div>
+  </div>
+  <button class="btn" onclick="sendPrompt('Explique la fermentation lactique et la respiration cellulaire dans le contexte du sport pour le grand oral SVT')">Approfondir le métabolisme énergétique ↗</button>
+</div>
+
+<!-- PARTIE II — CORRIGÉE -->
+<div class="sec" id="s3">
+  <div class="card">
+    <div class="badge svt">Chapitre SVT : Homéostasie · Régulation de la glycémie · Insuline et glucagon</div>
+    <p style="font-weight:500;font-size:14px;margin-bottom:10px">II. L'échec nutritionnel : la rupture de l'homéostasie énergétique</p>
+
+    <div class="inner">
+      <div class="badge svt">A — Le carburant cellulaire : glycogène, ATP et glucose <span class="new-badge">déplacé ici</span></div>
+      <p style="margin-bottom:8px">Avant de montrer les dysfonctionnements, il faut comprendre le système. La contraction musculaire nécessite un flux continu d'ATP, produit à partir du <em>glucose</em>. La principale forme de stockage est le <em>glycogène</em>, polymère de glucose stocké dans deux réservoirs :</p>
+      <div class="two">
+        <div style="background:var(--color-background-primary);border-radius:8px;padding:10px;border:0.5px solid var(--color-border-tertiary)">
+          <p style="font-size:11px;font-weight:500;margin-bottom:3px">Glycogène hépatique</p>
+          <p>~80–100 g · Régule la glycémie sanguine (homéostasie). Si épuisé → hypoglycémie → vertiges, malaise au milieu du parcours.</p>
+        </div>
+        <div style="background:var(--color-background-primary);border-radius:8px;padding:10px;border:0.5px solid var(--color-border-tertiary)">
+          <p style="font-size:11px;font-weight:500;margin-bottom:3px">Glycogène musculaire</p>
+          <p>~300–400 g · Carburant direct des fibres contractiles. Épuisé en ~60–90 min d'effort intense.</p>
+        </div>
+      </div>
+      <div class="hl green" style="margin-top:8px">Lien SVT direct : la régulation de la glycémie par insuline (cellules β du pancréas) et glucagon (cellules α) est le cœur du cours sur l'homéostasie. Citer la boucle de rétrocontrôle négatif est indispensable.</div>
+    </div>
+
+    <div class="inner">
+      <div class="badge warn">B — Signes et mécanismes d'échec nutritionnel <span class="new-badge">déplacé ici</span></div>
+      <p style="margin-bottom:8px">On comprend maintenant pourquoi une mauvaise nutrition fait échouer :</p>
+      <div class="tl">
+        <div class="tl-i"><p><strong>Hypoglycémie réactionnelle :</strong> un repas sucré rapide avant l'épreuve déclenche un pic d'insuline → chute brutale de la glycémie sous 0,7 g/L. Le cerveau, exclusivement glucodépendant, envoie des signaux d'alerte : faiblesse musculaire subite, brouillard mental, incapacité à franchir les obstacles.</p></div>
+        <div class="tl-i"><p><strong>Déshydratation cellulaire :</strong> −2 % du poids en eau = −10 à 20 % de performance. Les enzymes de la respiration cellulaire ralentissent faute de milieu aqueux optimal. La viscosité sanguine augmente, réduisant l'apport en O₂ aux muscles.</p></div>
+        <div class="tl-i"><p><strong>Déficit protéique (à l'entraînement) :</strong> sans acides aminés disponibles, la <em>protéosynthèse</em> musculaire post-effort est insuffisante. Les micro-lésions des fibres ne sont pas réparées → risque de blessure et stagnation. <em>Lien SVT : expression du génome, ARNm, ribosomes.</em></p></div>
+      </div>
+    </div>
+
+    <div class="inner">
+      <div class="badge perf">C — Stratégie nutritionnelle : restaurer l'homéostasie énergétique</div>
+      <div class="tl">
+        <div class="tl-i"><p><strong>J−2 / J−1 — Charge en glycogène :</strong> glucides complexes à index glycémique bas (riz, pâtes, pain complet). Libération lente de glucose → insuline stable → saturation progressive des réserves sans rebond hypoglycémique.</p></div>
+        <div class="tl-i"><p><strong>Matin J — Repas 2 h 30 avant l'épreuve :</strong> céréales, banane, yaourt. Éviter graisses et fibres (ralentissent la vidange gastrique → malaise pendant l'effort).</p></div>
+        <div class="tl-i"><p><strong>Hydratation :</strong> 500 mL d'eau 2 h avant. Urine claire = marqueur fiable d'euhydratation. Éviter les boissons sucrées concentrées : pic glycémique suivi d'une chute.</p></div>
+        <div class="tl-i"><p><strong>Phase d'entraînement :</strong> 1,6–2 g de protéines/kg/jour pour assurer la protéosynthèse musculaire et la réparation des fibres après les séances.</p></div>
+      </div>
+    </div>
+  </div>
+  <button class="btn" onclick="sendPrompt('Explique la boucle de rétrocontrôle insuline-glucagon et son lien avec la performance sportive, pour le grand oral SVT')">Approfondir l'homéostasie glycémique ↗</button>
+</div>
+
+<!-- PARTIE III -->
+<div class="sec" id="s4">
+  <div class="card">
+    <div class="badge svt">Chapitre SVT : Système nerveux · Hormones · Axe hypothalamo-hypophyso-surrénalien</div>
+    <p style="font-weight:500;font-size:14px;margin-bottom:10px">III. L'échec mental : la neurobiologie du stress aigu</p>
+
+    <div class="inner">
+      <div class="badge perf">A — Signes visibles du stress au BJSP</div>
+      <div class="row"><div class="dot"></div><p>Tachycardie avant le signal de départ (FC parfois > 120 bpm au repos apparent) : activation du système nerveux sympathique</p></div>
+      <div class="row"><div class="dot"></div><p>Hyperventilation : fréquence respiratoire élevée, réduisant la PCO₂ sanguine → vertiges (alcalose respiratoire)</p></div>
+      <div class="row"><div class="dot"></div><p>"Blanc" cognitif : oubli soudain du plan du parcours, hésitation devant des obstacles parfaitement maîtrisés à l'entraînement</p></div>
+      <div class="row"><div class="dot"></div><p>Tension musculaire excessive : contractions parasites qui gaspillent l'ATP et ralentissent les gestes techniques</p></div>
+    </div>
+
+    <div class="inner">
+      <div class="badge svt">B — Mécanisme neurobiologique : l'axe HPA et le court-circuit cognitif</div>
+      <div class="tl">
+        <div class="tl-i"><p><strong>L'amygdale détecte la menace</strong> (jury, chronomètre, enjeu) en moins de 100 ms et envoie un signal d'urgence à l'hypothalamus — avant même que le cortex conscient ait traité l'information.</p></div>
+        <div class="tl-i"><p><strong>L'axe HPA s'active :</strong> Hypothalamus → CRH → Hypophyse → ACTH → Glandes surrénales → sécrétion d'<em>adrénaline</em> (effet immédiat : FC+, glycémie+, bronchodilatation) et de <em>cortisol</em> (effet prolongé : mobilisation des réserves énergétiques).</p></div>
+        <div class="tl-i"><p><strong>Le cortex préfrontal est inhibé :</strong> le cerveau passe en mode "survie réflexe". Mémoire de travail, planification et inhibition sont réduites. Le candidat réagit aux stimuli immédiats au lieu d'appliquer sa stratégie.</p></div>
+      </div>
+      <div class="hl">Formulation pour le jury : "On observe une compétition entre le système limbique (amygdale) et le cortex préfrontal pour le contrôle du comportement — mécanisme issu du cours sur la communication nerveuse."</div>
+    </div>
+
+    <div class="inner">
+      <div class="badge perf">C — Solutions fondées sur la physiologie nerveuse</div>
+      <div class="tl">
+        <div class="tl-i"><p><strong>Cohérence cardiaque (5–5–5) :</strong> inspirer 5 s / bloquer 5 s / expirer 5 s. Active le nerf vague (X), stimule le système parasympathique, réduit la sécrétion de cortisol en 3 minutes.</p></div>
+        <div class="tl-i"><p><strong>Visualisation motrice :</strong> répéter mentalement le parcours active les mêmes circuits neuronaux moteurs que l'exécution réelle (Jeannerod, 1994). Réduit l'activation de l'amygdale face à un environnement déjà "connu".</p></div>
+        <div class="tl-i"><p><strong>Recadrage cognitif :</strong> reformuler "je suis stressé" en "je suis activé" maintient le cortex préfrontal en ligne (Wood Brooks, Harvard, 2014 : +22 % de performance mesurée).</p></div>
+        <div class="tl-i"><p><strong>Habituation par entraînement en conditions réelles :</strong> répéter les passages sous pression (chronomètre, jury fictif) réduit progressivement la réponse de l'amygdale par <em>extinction de la réponse conditionnée</em> — plasticité synaptique, au programme SVT.</p></div>
+      </div>
+    </div>
+  </div>
+  <button class="btn" onclick="sendPrompt('Détaille l\'axe hypothalamo-hypophyso-surrénalien et son rôle dans le stress pour une présentation grand oral SVT')">Approfondir l'axe HPA ↗</button>
+</div>
+
+<!-- CONCLUSION -->
+<div class="sec" id="s5">
+  <div class="card">
+    <div class="badge oral">Réponse à la problématique</div>
+    <div class="inner">
+      <p>"Nous avons vu que les échecs au parcours BJSP ne relèvent pas du hasard : ils s'expliquent par des mécanismes biologiques précis — l'insuffisance du métabolisme aérobie, la rupture de l'homéostasie glycémique et l'inhibition du cortex préfrontal par le stress. La SVT nous donne les outils pour comprendre ces mécanismes <em>et</em> pour les corriger : entraînement ciblé sur la biogénèse mitochondriale, nutrition péricompétitive fondée sur la régulation insulinique, et techniques de gestion du stress ancrées dans la neurophysiologie."</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="badge oral">Ouverture</div>
+    <div class="inner">
+      <p>Ces mécanismes dépassent le seul cadre du BJSP. Ils illustrent des enjeux de <em>santé publique</em> majeurs : la sédentarité réduit la VO₂max de la population générale, le déséquilibre alimentaire génère une instabilité glycémique chronique précurseur du diabète de type 2, et le stress chronique devient une cause de maladies cardiovasculaires par activation prolongée du système sympathique.</p>
+    </div>
+    <div class="hl blue">Ouverture alternative : le dopage (EPO augmente le transport d'O₂ en stimulant la production de globules rouges) ou la génétique des performances (polymorphismes du gène ACTN3 et fibres musculaires rapides).</div>
+  </div>
+  <button class="btn" onclick="sendPrompt('Propose trois ouvertures différentes pour la conclusion de mon grand oral SVT sur le BJSP')">Proposer d'autres ouvertures ↗</button>
+</div>
+
+<!-- QUESTIONS JURY -->
+<div class="sec" id="s6">
+  <div class="card">
+    <div class="badge oral">10 min de questions — préparation aux attendus</div>
+    <div class="inner">
+      <p style="font-weight:500;margin-bottom:4px">"Pourquoi ce sujet ?"</p>
+      <p>Lien personnel avec la préparation au concours BJSP + démarche scientifique (utiliser la SVT pour optimiser concrètement une performance). Montre la cohérence entre projet personnel et spécialité.</p>
+    </div>
+    <div class="sep"></div>
+    <div class="inner">
+      <p style="font-weight:500;margin-bottom:4px">"Quelle est la différence entre respiration cellulaire et fermentation lactique ?"</p>
+      <p>Répondre avec les équations bilans, le bilan ATP (30 vs 2), le lieu (mitochondrie vs cytoplasme) et la présence ou absence d'O₂. Ne pas confondre avec la respiration pulmonaire.</p>
+    </div>
+    <div class="sep"></div>
+    <div class="inner">
+      <p style="font-weight:500;margin-bottom:4px">"Comment fonctionne la régulation de la glycémie ?"</p>
+      <p>Boucle de rétrocontrôle négatif : glycémie > 1 g/L → insuline (cellules β pancréas) → entrée du glucose dans les cellules + glycogenèse → retour à la normale. Inversement avec le glucagon (cellules α).</p>
+    </div>
+    <div class="sep"></div>
+    <div class="inner">
+      <p style="font-weight:500;margin-bottom:4px">"Qu'est-ce que l'axe hypothalamo-hypophyso-surrénalien ?"</p>
+      <p>Axe hormonal du stress : Hypothalamus (CRH) → Hypophyse antérieure (ACTH) → Cortex surrénalien (cortisol). Réponse lente (minutes). À distinguer de la voie rapide sympathique (adrénaline, médullosurrénale, secondes).</p>
+    </div>
+    <div class="sep"></div>
+    <div class="inner">
+      <p style="font-weight:500;margin-bottom:4px">"Quelles sont les limites de votre démonstration ?"</p>
+      <p>La VO₂max est plafonnée génétiquement (~50 % de variabilité héréditaire). Les effets de la visualisation motrice varient selon les individus. La biologie seule ne suffit pas : facteurs psychologiques, sociaux et environnementaux jouent aussi un rôle.</p>
+    </div>
+    <div class="sep"></div>
+    <div class="inner">
+      <p style="font-weight:500;margin-bottom:4px">"En quoi ce sujet dépasse-t-il le seul cadre du BJSP ?"</p>
+      <p>Ces mécanismes expliquent la sédentarité, le diabète de type 2 (résistance à l'insuline), les maladies cardiovasculaires liées au stress chronique, et les troubles du comportement alimentaire. La biologie de la performance est aussi une biologie de la santé publique.</p>
+    </div>
+  </div>
+  <button class="btn" onclick="sendPrompt('Génère 5 autres questions difficiles que le jury pourrait poser sur mon grand oral SVT BJSP, avec les réponses attendues')">Générer d'autres questions difficiles ↗</button>
+</div>
+
+<script>
+function go(i){
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('on'));
+  document.querySelectorAll('.sec').forEach(s=>s.classList.remove('on'));
+  document.querySelectorAll('.tab')[i].classList.add('on');
+  document.getElementById('s'+i).classList.add('on');
+}
+</script>
